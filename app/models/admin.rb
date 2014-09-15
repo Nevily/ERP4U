@@ -1,14 +1,9 @@
-class User < ActiveRecord::Base
+class Admin < ActiveRecord::Base
+  validates :username,  uniqueness: { case_sensitive: false  }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  validates :username,  uniqueness: { case_sensitive: false  }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
+  devise :database_authenticatable, :trackable, :timeoutable, :lockable 
 
-  has_one :company, inverse_of: :user,  dependent: :destroy 
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-   # Allows to use the 'login' variable some where else in the code
   def login=(login)
     @login = login
   end

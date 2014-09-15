@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :admins
   get 'pages/index'
+  resources :companies
 
   devise_for :users 
 

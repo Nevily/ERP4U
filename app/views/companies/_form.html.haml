@@ -1,0 +1,74 @@
+= form_for @company do |f|
+  - if @company.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@company.errors.count, "error")} prohibited this category from being saved:"
+      %ul
+        - @company.errors.full_messages.each do |msg|
+          %li= msg
+  =f.label :name
+  %br
+  = f.text_field :name
+  %br
+  %br
+  =f.label :phone
+  %br
+  = f.text_field :phone
+  %br
+  %br
+  =f.label :description
+  %br
+  = f.text_area :description
+  %br
+  %br
+
+  -if @provinces
+    .control-group
+      = f.label :province, class: 'control-label' 
+      .controls
+        = select("company", "province_id", @provinces.collect {|province| [ province.title.capitalize, province.id ] }, {include_blank: 'None'})
+      %br
+
+  -if @branches
+    .control-group
+      = f.label :branch, class: 'control-label' 
+      .controls
+        = select("company", "branch_id", @branches.collect {|branch| [ branch.title.capitalize, branch.id ] } + [['Add New Branch',nil]], {include_blank: 'None'}, { class: 'external_option' })
+      %br
+
+  -if @erp_systems
+    .control-group
+      = f.label :erp_system, class: 'control-label' 
+      .controls
+        = select("company", "erp_system_id", @erp_systems.collect {|erp_system| [ erp_system.title.capitalize, erp_system.id ] } + [['Add New Erp System', nil ]], {include_blank: 'None'}, { class: 'external_option' })
+      %br
+
+  -if @improve_processes
+    .control-group
+      = f.label :improve_process, class: 'control-label' 
+      .controls
+        = select("company", "improve_process_id", @improve_processes.collect {|improve_process| [ improve_process.title.capitalize, improve_process.id ] } + [['Add New Improve Process',nil]], {include_blank: 'None'}, { class: 'external_option' })
+      %br
+
+  -if @inventary_systems
+    .control-group
+      = f.label :inventary_systems, class: 'control-label' 
+      .controls
+        = select("company", "inventory_system_id", @inventary_systems.collect {|inventary_system| [ inventary_system.title.capitalize, inventary_system.id ] } + [['Add New Inventary System',nil]], {include_blank: 'None'}, { class: 'external_option' })
+      %br
+
+  -if @logistics_systems
+    .control-group
+      = f.label :logistics_systems, class: 'control-label' 
+      .controls
+        = select("company", "logistics_system_id", @logistics_systems.collect {|logistics_system| [ logistics_system.title.capitalize, logistics_system.id ] } + [['Add New Logistics System',nil]], {include_blank: 'None'}, { class: 'external_option' })
+      %br
+
+  -if @salary_systems
+    .control-group
+      = f.label :salary_systems, class: 'control-label' 
+      .controls
+        = select("company", "salary_system_id", @salary_systems.collect {|salary_system| [ salary_system.title.capitalize, salary_system.id ] } + [['Add New Salary System',nil]], {include_blank: 'None'}, { class: 'external_option' })
+      %br
+
+  .actions
+  = f.submit 'Save', class: 'btn btn-mini btn-primary'

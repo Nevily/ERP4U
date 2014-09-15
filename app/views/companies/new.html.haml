@@ -1,0 +1,6 @@
+%h1 Company
+
+- if current_user.company.present? and !params[:method] == "post"
+  = 'You already has created a company'
+- else
+  = render 'form'
